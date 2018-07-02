@@ -9,7 +9,6 @@ public class Tweet {
     public String body;
     public long uid; // database ID for the tweet
     // public User user;
-
     public String createdAt;
 
 
