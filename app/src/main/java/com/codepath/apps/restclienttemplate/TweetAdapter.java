@@ -29,6 +29,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
+        // remember: the inflater creates the view in memory
         View tweetView = inflater.inflate(R.layout.item_tweet, parent, false);
         ViewHolder viewHolder = new ViewHolder(tweetView);
         return viewHolder;
@@ -42,6 +43,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         // populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
+        holder.tvRelativeDate.setText(tweet.relativeDate);
 
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
@@ -57,6 +59,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
+        public TextView tvRelativeDate;
 
         public ViewHolder(View itemView){
             super (itemView);
@@ -65,6 +68,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+            tvRelativeDate = (TextView) itemView.findViewById(R.id.tvRelativeDate);
         }
     }
 }
