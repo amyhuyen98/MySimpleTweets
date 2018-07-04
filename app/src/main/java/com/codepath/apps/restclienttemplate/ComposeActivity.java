@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -21,6 +22,7 @@ public class ComposeActivity extends AppCompatActivity {
     EditText etText;
     Button btnTweet;
     TwitterClient client;
+    TextView tvCharCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

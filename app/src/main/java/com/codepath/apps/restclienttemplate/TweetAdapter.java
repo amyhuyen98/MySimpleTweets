@@ -13,6 +13,8 @@ import com.codepath.apps.restclienttemplate.models.GlideApp;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
     private List<Tweet> mTweets;
@@ -47,6 +49,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
+                .transform(new RoundedCornersTransformation( 15, 0))
                 .into(holder.ivProfileImage);
     }
 
@@ -70,5 +73,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvRelativeDate = (TextView) itemView.findViewById(R.id.tvRelativeDate);
         }
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mTweets.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        mTweets.addAll(list);
+        notifyDataSetChanged();
     }
 }
