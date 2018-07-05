@@ -50,6 +50,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
+                .placeholder(R.drawable.ic_vector_person)
                 .transform(new RoundedCornersTransformation( 15, 0))
                 .into(holder.ivProfileImage);
     }

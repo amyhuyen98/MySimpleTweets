@@ -36,9 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/tvUserName"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_toStartOf="@id/tvRelativeDate"
         android:text="TextView"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/medium_gray_50"
         android:textStyle="bold" />
 
