@@ -21,17 +21,17 @@
         android:id="@+id/inputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
         app:counterEnabled="true"
         app:counterMaxLength="140">
 
         <EditText
             android:id="@+id/etText"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_centerInParent="false"
-            android:layout_margin="10dp"
-            android:hint="What's happening?"
-            tools:layout_editor_absoluteX="10dp"
-            tools:layout_editor_absoluteY="96dp" />
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            android:gravity="bottom|left"
+            android:hint="What's happening?" />
     </android.support.design.widget.TextInputLayout>
 </RelativeLayout>
