@@ -1,8 +1,11 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +14,16 @@ import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.GlideApp;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
+
+    // set request code for replying to someone's tweet
+    private final int REQUEST_CODE = 30;
 
     private List<Tweet> mTweets;
     Context context;
@@ -41,12 +49,20 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get the data according to position
-        Tweet tweet = mTweets.get(position);
+        final Tweet tweet = mTweets.get(position);
         // populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
         holder.tvRelativeDate.setText(tweet.relativeDate);
         holder.tvHandle.setText("@" + tweet.user.screenName);
+        holder.ivReply.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Log.d("Tag", "Tapped");
+                Intent intent = new Intent(context, ReplyActivity.class);
+                intent.putExtra("originalTweet", Parcels.wrap(tweet));
+                ((Activity) context).startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
 
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
@@ -66,6 +82,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public TextView tvBody;
         public TextView tvRelativeDate;
         public TextView tvHandle;
+        public ImageView ivReply;
 
         public ViewHolder(View itemView){
             super (itemView);
@@ -76,6 +93,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvRelativeDate = (TextView) itemView.findViewById(R.id.tvRelativeDate);
             tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
+            ivReply = (ImageView) itemView.findViewById(R.id.ivReply);
         }
     }
 

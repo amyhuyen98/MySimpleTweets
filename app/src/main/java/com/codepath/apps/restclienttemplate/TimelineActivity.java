@@ -121,12 +121,14 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){
         // check request code and result code first
-        // use data parameter
-        Tweet tweet = (Tweet) Parcels.unwrap(intent.getParcelableExtra("newTweet"));
-        // add tweet to tweets
-        tweets.add(0, tweet);
-        tweetAdapter.notifyItemInserted(0);
-        rvTweets.scrollToPosition(0);
+        if (resultCode == RESULT_OK) {
+            // use data parameter
+            Tweet tweet = (Tweet) Parcels.unwrap(intent.getParcelableExtra("newTweet"));
+            // add tweet to tweets
+            tweets.add(0, tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+        }
     }
 
     private void populateTimeline(){

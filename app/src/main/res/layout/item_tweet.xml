@@ -51,12 +51,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/tvUserName"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:textColor="@color/gray"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_toEndOf="@id/ivProfileImage"
-        android:text="TextView" />
+        android:layout_marginRight="5dp"
+        android:text="TextView"
+        android:textColor="@color/gray" />
 
     <TextView
         android:id="@+id/tvRelativeDate"
@@ -69,4 +69,20 @@
         android:layout_marginTop="5dp"
         android:layout_alignBottom="@id/tvUserName"
         android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/ivReply"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvBody"
+        android:layout_marginStart="71dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/ivProfileImage"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:tint="@color/medium_gray_50"
+        app:srcCompat="@drawable/reply" />
+
 </RelativeLayout>

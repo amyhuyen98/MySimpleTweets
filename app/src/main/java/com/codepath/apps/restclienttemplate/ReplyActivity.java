@@ -20,13 +20,14 @@ import org.parceler.Parcels;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ComposeActivity extends AppCompatActivity {
+public class ReplyActivity extends AppCompatActivity {
 
     EditText etText;
     Button btnTweet;
     TwitterClient client;
     TextView tvUserName;
     TextView tvHandle;
+    String originalTweetId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +49,27 @@ public class ComposeActivity extends AppCompatActivity {
                     user = User.fromJSON(response);
                     tvHandle.setText("@" + user.screenName);
                     tvUserName.setText(user.name);
-                    GlideApp.with(ComposeActivity.this)
+                    GlideApp.with(ReplyActivity.this)
                             .load(user.profileImageUrl)
                             .placeholder(R.drawable.ic_vector_person)
                             .into((ImageView) findViewById(R.id.ivProfileImage));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
+
+                Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("originalTweet"));
+                originalTweetId = tweet.tweetId;
+                etText.setText("@"+ tweet.user.screenName, TextView.BufferType.EDITABLE);
+                etText.setSelection(etText.getText().length());}
+
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
                 Log.d("TwitterClient", responseString);
                 throwable.printStackTrace();
             }
         });
+
     }
 
     public void onClose(View view){
@@ -71,12 +79,12 @@ public class ComposeActivity extends AppCompatActivity {
     }
 
     public void onPostTweet(View view){
-        client.sendTweet(etText.getText().toString(), new JsonHttpResponseHandler(){
+        client.replyTweet(etText.getText().toString(), originalTweetId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Tweet newTweet;
                 try {
-                     newTweet = Tweet.fromJSON(response);
+                    newTweet = Tweet.fromJSON(response);
                     // prepare data intent
                     Intent intent = new Intent();
 
@@ -88,11 +96,13 @@ public class ComposeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d("TwitterClient", responseString);
                 throwable.printStackTrace();
             }
         });
+
     }
 }

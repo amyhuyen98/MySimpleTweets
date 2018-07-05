@@ -21,6 +21,7 @@ public class Tweet {
     public User user;
     public String createdAt;
     public String relativeDate;
+    public String tweetId;
 
     public Tweet(){}
 
@@ -33,6 +34,7 @@ public class Tweet {
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        tweet.tweetId = jsonObject.getString("id_str");
 
         // extract rawJsonDate value from JSON and convert to relativeDate
         String rawJsonDate = jsonObject.getString("created_at");
