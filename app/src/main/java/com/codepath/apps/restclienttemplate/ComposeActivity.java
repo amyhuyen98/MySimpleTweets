@@ -33,6 +33,12 @@ public class ComposeActivity extends AppCompatActivity {
         btnTweet = (Button) findViewById(R.id.btnTweet);
     }
 
+    public void onClose(View view){
+        // prepare new intent to return to timeline activity
+        Intent intent = new Intent(this, TimelineActivity.class);
+        startActivity(intent);
+    }
+
     public void onPostTweet(View view){
         client.sendTweet(etText.getText().toString(), new JsonHttpResponseHandler(){
             @Override

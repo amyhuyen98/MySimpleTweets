@@ -20,4 +20,7 @@
     <color name="inline_action_retweet">@color/medium_green</color>
     <color name="inline_action_retweet_pressed">@color/medium_gray_50</color>
     <color name="white">#ffffff</color>
+    <color name="night">#161B27</color>
+    <color name="night_light">#1C2634</color>
+    <color name="gray">#D6D6D6</color>
 </resources>

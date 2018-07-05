@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/night"
     tools:context=".ComposeActivity">
 
     <Button
@@ -13,6 +14,7 @@
         android:layout_below="@id/inputLayout"
         android:layout_alignRight="@id/inputLayout"
         android:onClick="onPostTweet"
+        android:background="@color/twitter_blue_50"
         android:text="Tweet"
         tools:layout_editor_absoluteX="257dp"
         tools:layout_editor_absoluteY="425dp" />
@@ -22,16 +24,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="45dp"
         app:counterEnabled="true"
-        app:counterMaxLength="140">
+        app:counterMaxLength="140"
+        app:counterTextAppearance="@style/CounterStyle">
 
         <EditText
             android:id="@+id/etText"
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="180dp"
             android:layout_margin="5dp"
             android:gravity="bottom|left"
-            android:hint="What's happening?" />
+            android:textColor="@color/gray"
+            android:hint="What's happening?"
+            android:textColorHint="@color/gray"/>
     </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onClose"
+        app:srcCompat="@drawable/ic_vector_close" />
 </RelativeLayout>

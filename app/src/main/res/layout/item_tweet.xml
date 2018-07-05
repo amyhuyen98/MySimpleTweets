@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
+    android:background="@color/night_light"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:srcCompat="@android:color/black" />
@@ -17,16 +24,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
         android:layout_alignStart="@id/tvBody"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/tvBody"
+        android:id="@+id/tvHandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/ivProfileImage"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_marginLeft="5dp"
+        android:text="TextView"
+        android:textColor="@color/medium_gray_50"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvBody"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/tvUserName"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="5dp"
         android:layout_toEndOf="@id/ivProfileImage"
         android:text="TextView" />
 
@@ -34,8 +58,11 @@
         android:id="@+id/tvRelativeDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
         android:layout_alignParentEnd="true"
+        android:textColor="@color/medium_gray_50"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
         android:layout_alignBottom="@id/tvUserName"
         android:text="TextView" />
 </RelativeLayout>
