@@ -23,10 +23,14 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
     // set request code for replying to someone's tweet
-    private final int REQUEST_CODE = 30;
+    private final int REPLY_REQUEST_CODE = 30;
+    private final int RETWEET_REQUEST_CODE = 40;
 
+    // declare variables
     private List<Tweet> mTweets;
     Context context;
+    TwitterClient client;
+
     // pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets){
         mTweets = tweets;
@@ -47,7 +51,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
     // bind the values based on the position of the element
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // get the data according to position
         final Tweet tweet = mTweets.get(position);
         // populate the views according to this data
@@ -55,14 +59,37 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         holder.tvBody.setText(tweet.body);
         holder.tvRelativeDate.setText(tweet.relativeDate);
         holder.tvHandle.setText("@" + tweet.user.screenName);
+        holder.tvRetweetNum.setText(Long.toString(tweet.retweetNum));
+        holder.tvFaveNum.setText(Long.toString(tweet.faveNum));
+
+        // set onClickListener for reply button
         holder.ivReply.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Log.d("Tag", "Tapped");
+                Log.d("Tag", "Reply Tapped");
                 Intent intent = new Intent(context, ReplyActivity.class);
                 intent.putExtra("originalTweet", Parcels.wrap(tweet));
-                ((Activity) context).startActivityForResult(intent, REQUEST_CODE);
+                ((Activity) context).startActivityForResult(intent, REPLY_REQUEST_CODE);
             }
         });
+
+        // set onClickListener for retweet button
+//        holder.ivRetweet.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                Log.d("Tag", "Retweet Tapped");
+//                client = TwitterApp.getRestClient(context);
+//                client.retweet(tweet.tweetId, new JsonHttpResponseHandler(){
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                        holder.tvRetweetNum.setText(Integer.toString(Integer.parseInt(holder.tvRetweetNum.getText().toString())+1));
+//                    }
+//                    @Override
+//                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                        Log.d("TwitterClient", responseString);
+//                        throwable.printStackTrace();
+//                    }
+//                });
+//            }
+//        });
 
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
@@ -76,13 +103,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         return mTweets.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
         public TextView tvRelativeDate;
         public TextView tvHandle;
         public ImageView ivReply;
+        public TextView tvRetweetNum;
+        public TextView tvFaveNum;
+        public ImageView ivRetweet;
+        public ImageView ivFavorite;
 
         public ViewHolder(View itemView){
             super (itemView);
@@ -94,8 +125,33 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvRelativeDate = (TextView) itemView.findViewById(R.id.tvRelativeDate);
             tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
             ivReply = (ImageView) itemView.findViewById(R.id.ivReply);
+            tvRetweetNum = (TextView) itemView.findViewById(R.id.tvRetweetNum);
+            tvFaveNum = (TextView) itemView.findViewById(R.id.tvFaveNum);
+            ivRetweet = (ImageView) itemView.findViewById(R.id.ivRetweet);
+            ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
+
+            // set itemView's onClickListener
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            // get item position
+            int position = getAdapterPosition();
+            // make sure the position is valid
+            if (position != RecyclerView.NO_POSITION){
+                // get the tweet at the position
+                Tweet tweet = mTweets.get(position);
+                // create intent for new activity
+                Intent intent = new Intent(context, TweetDetails.class);
+                intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                context.startActivity(intent);
+            }
+
         }
     }
+
 
     // Clean all elements of the recycler
     public void clear() {

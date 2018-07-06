@@ -22,6 +22,10 @@ public class Tweet {
     public String createdAt;
     public String relativeDate;
     public String tweetId;
+    public long retweetNum;
+    public long faveNum;
+    public String date;
+    public String time;
 
     public Tweet(){}
 
@@ -35,10 +39,16 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         tweet.tweetId = jsonObject.getString("id_str");
+        tweet.retweetNum = jsonObject.getLong("retweet_count");
+        tweet.faveNum = jsonObject.getLong("favorite_count");
 
         // extract rawJsonDate value from JSON and convert to relativeDate
         String rawJsonDate = jsonObject.getString("created_at");
         tweet.relativeDate = getRelativeTimeAgo(rawJsonDate);
+
+        // get date and time
+        tweet.date = getDate(rawJsonDate);
+        tweet.time = getTime(rawJsonDate);
         return tweet;
 
     }
@@ -59,5 +69,29 @@ public class Tweet {
         }
 
         return relativeDate;
+    }
+
+    // method that changes the rawJsondate from Twitter API into date
+    public static String getDate (String rawJsonDate) {
+        String date="• ";
+        String[] array = rawJsonDate.split(" ");
+        for (int i=2; i>=1; i--){
+            date += (array[i] + " ");
+        }
+        date += array[array.length-1];
+        return date;
+    }
+
+    // method that changes the rawJsondate from Twitter API into time
+    public static String getTime (String rawJsonDate){
+        String time="";
+        String[] array = rawJsonDate.split(" ");
+        String temp = array[3];
+        String[] timeArray = temp.split(":");
+        time += Integer.toString((Integer.parseInt(timeArray[0])+17)%12) + ":";
+        time += timeArray[1];
+        if ((Integer.parseInt(timeArray[0])+17)>= 12){time += " PM";}
+        else {time += " AM";}
+        return time;
     }
 }

@@ -1,0 +1,52 @@
+package com.codepath.apps.restclienttemplate;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.codepath.apps.restclienttemplate.models.GlideApp;
+
+import org.parceler.Parcels;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
+public class TweetDetails extends AppCompatActivity {
+
+    ImageView ivProfileImage;
+    TextView tvUserName;
+    TextView tvHandle;
+    TextView tvBody;
+    TextView tvTime;
+    TextView tvDate;
+    Tweet tweet;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tweet_details);
+
+        ivProfileImage = findViewById(R.id.ivProfileImage);
+        tvUserName = findViewById(R.id.tvUserName);
+        tvHandle = findViewById(R.id.tvHandle);
+        tvBody = findViewById(R.id.tvBody);
+        tvTime = findViewById(R.id.tvTime);
+        tvDate = findViewById(R.id.tvDate);
+
+        // unwrap the tweet from the intent
+        tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
+        Log.d("TweetDetails", "Showing details for tweet");
+        tvUserName.setText(tweet.user.name);
+        tvHandle.setText("@" + tweet.user.screenName);
+        tvBody.setText(tweet.body);
+        tvTime.setText(tweet.time);
+        tvDate.setText(tweet.date);
+
+        GlideApp.with(this)
+                .load(tweet.user.profileImageUrl)
+                .placeholder(R.drawable.ic_vector_person)
+                .transform(new RoundedCornersTransformation( 15, 0))
+                .into(ivProfileImage);
+    }
+}
