@@ -99,10 +99,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             @Override
             public void onClick(View v){
                 Log.d("Tag", "Retweet Tapped");
-                holder.ivRetweet.setSelected(true);
                 client.retweet(tweet.tweetId, new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        holder.ivRetweet.setSelected(true);
                         holder.tvRetweetNum.setText(Integer.toString(Integer.parseInt(holder.tvRetweetNum.getText().toString())+1));
                     }
                     @Override
@@ -119,9 +119,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             @Override
             public void onClick(View v){
                 Log.d("Tag", "Favorite Tapped");
-                holder.ivFavorite.setSelected(true);
                 client.favorite(tweet.tweetId, new JsonHttpResponseHandler(){
                     @Override public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                        holder.ivFavorite.setSelected(true);
                         holder.tvFaveNum.setText(Integer.toString(Integer.parseInt(holder.tvFaveNum.getText().toString())+1));
                     }
                     @Override

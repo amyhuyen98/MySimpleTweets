@@ -77,9 +77,9 @@ public class TweetDetails extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Log.d("Tag", "Favorite Tapped");
-                ivFavorite.setSelected(true);
                 client.favorite(tweet.tweetId, new JsonHttpResponseHandler(){
                     @Override public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                        ivFavorite.setSelected(true);
                         tvFaveNum.setText(Integer.toString(Integer.parseInt(tvFaveNum.getText().toString())+1));
                     }
                     @Override
@@ -96,10 +96,10 @@ public class TweetDetails extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Log.d("Tag", "Retweet Tapped");
-                ivRetweet.setSelected(true);
                 client.retweet(tweet.tweetId, new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        ivRetweet.setSelected(true);
                         tvRetweetNum.setText(Integer.toString(Integer.parseInt(tvRetweetNum.getText().toString())+1));
                     }
                     @Override
