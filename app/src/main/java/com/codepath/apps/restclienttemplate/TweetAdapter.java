@@ -22,12 +22,12 @@ import org.parceler.Parcels;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
     // set request code for replying to someone's tweet
     private final int REPLY_REQUEST_CODE = 30;
-    private final int RETWEET_REQUEST_CODE = 40;
 
     // declare variables
     private List<Tweet> mTweets;
@@ -66,6 +66,19 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         holder.tvHandle.setText("@" + tweet.user.screenName);
         holder.tvRetweetNum.setText(Long.toString(tweet.retweetNum));
         holder.tvFaveNum.setText(Long.toString(tweet.faveNum));
+
+        // check if there is media and get media
+        if (tweet.embedUrl != null){
+            holder.ivMedia.setVisibility(View.VISIBLE);
+            GlideApp.with(context)
+                    .load(tweet.embedUrl)
+                    .centerInside()
+                    .transform(new RoundedCornersTransformation( 15, 0))
+                    .into(holder.ivMedia);
+        }
+        else{
+            holder.ivMedia.setVisibility(View.GONE);
+        }
 
         // set onClickListener for reply button
         holder.ivReply.setOnClickListener(new View.OnClickListener(){
@@ -144,6 +157,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public TextView tvFaveNum;
         public ImageView ivRetweet;
         public ImageView ivFavorite;
+        public ImageView ivMedia;
 
         public ViewHolder(View itemView){
             super (itemView);
@@ -159,6 +173,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvFaveNum = (TextView) itemView.findViewById(R.id.tvFaveNum);
             ivRetweet = (ImageView) itemView.findViewById(R.id.ivRetweet);
             ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
+            ivMedia = (ImageView) itemView.findViewById(R.id.ivMedia);
 
             // set itemView's onClickListener
             itemView.setOnClickListener(this);
@@ -173,15 +188,14 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             if (position != RecyclerView.NO_POSITION){
                 // get the tweet at the position
                 Tweet tweet = mTweets.get(position);
-                // create intent for new activity
                 Intent intent = new Intent(context, TweetDetails.class);
+                // create intent for new activity
                 intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
                 context.startActivity(intent);
             }
 
         }
     }
-
 
     // Clean all elements of the recycler
     public void clear() {

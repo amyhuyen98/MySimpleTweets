@@ -4,6 +4,7 @@ import android.text.format.DateUtils;
 
 import com.codepath.apps.restclienttemplate.models.User;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
@@ -28,6 +29,7 @@ public class Tweet {
     public String time;
     public Boolean favorited;
     public Boolean retweeted;
+    public String embedUrl;
 
     public Tweet(){}
 
@@ -53,6 +55,17 @@ public class Tweet {
         // get date and time
         tweet.date = getDate(rawJsonDate);
         tweet.time = getTime(rawJsonDate);
+
+        // get the image url
+        JSONObject entities = jsonObject.getJSONObject("entities");
+        try {
+            JSONArray media = entities.getJSONArray("media");
+            if (media.length() != 0) {
+                tweet.embedUrl = media.getJSONObject(0).getString("media_url");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         return tweet;
 

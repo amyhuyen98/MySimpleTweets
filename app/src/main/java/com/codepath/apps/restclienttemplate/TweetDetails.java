@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetDetails extends AppCompatActivity {
 
@@ -32,6 +33,7 @@ public class TweetDetails extends AppCompatActivity {
     ImageView ivRetweet;
     ImageView ivFavorite;
     TwitterClient client;
+    ImageView ivMedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class TweetDetails extends AppCompatActivity {
         ivReply = findViewById(R.id.ivReply);
         ivRetweet = findViewById(R.id.ivRetweet);
         ivFavorite = findViewById(R.id.ivFavorite);
+        ivMedia = findViewById(R.id.ivMedia);
 
         // unwrap the tweet from the intent
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
@@ -65,7 +68,7 @@ public class TweetDetails extends AppCompatActivity {
         client = TwitterApp.getRestClient(this);
 
 
-        // check if tweet has already been retweeted or favorited and change colors to match
+        // check if tweet has already been retweeted or favorited (from the details screen)
         if (tweet.favorited){ivFavorite.setSelected(true);}
         if (tweet.retweeted){ivRetweet.setSelected(true);}
 
@@ -113,6 +116,19 @@ public class TweetDetails extends AppCompatActivity {
                 .placeholder(R.drawable.ic_vector_person)
                 .transform(new CircleCrop())
                 .into(ivProfileImage);
+
+        // check if there is media and get media
+        if (tweet.embedUrl != null){
+            ivMedia.setVisibility(View.VISIBLE);
+            GlideApp.with(this)
+                    .load(tweet.embedUrl)
+                    .centerInside()
+                    .transform(new RoundedCornersTransformation( 15, 0))
+                    .into(ivMedia);
+        }
+        else{
+            ivMedia.setVisibility(View.GONE);
+        }
     }
 
     public void onClose(View view){

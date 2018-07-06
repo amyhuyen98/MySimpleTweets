@@ -41,7 +41,7 @@ public class ReplyActivity extends AppCompatActivity {
         tvHandle = (TextView) findViewById(R.id.tvHandle);
 
 
-        // get user info to load user image
+        // get user info to load user profile image, handle, and name
         client.getUserInfo(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){

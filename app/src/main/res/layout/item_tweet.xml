@@ -134,4 +134,15 @@
         android:cropToPadding="true"
         app:srcCompat="@drawable/ic_favorite"/>
 
+    <ImageView
+        android:id="@+id/ivMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/ivReply"
+        android:layout_toEndOf="@id/ivProfileImage"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>
