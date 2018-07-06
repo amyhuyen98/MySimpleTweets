@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.codepath.apps.restclienttemplate.models.GlideApp;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -51,6 +52,7 @@ public class ComposeActivity extends AppCompatActivity {
                     GlideApp.with(ComposeActivity.this)
                             .load(user.profileImageUrl)
                             .placeholder(R.drawable.ic_vector_person)
+                            .transform(new CircleCrop())
                             .into((ImageView) findViewById(R.id.ivProfileImage));
                 } catch (JSONException e) {
                     e.printStackTrace();

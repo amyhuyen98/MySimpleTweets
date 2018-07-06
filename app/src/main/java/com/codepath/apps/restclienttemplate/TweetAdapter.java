@@ -12,13 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.codepath.apps.restclienttemplate.models.GlideApp;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import cz.msebera.android.httpclient.Header;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 
@@ -34,6 +37,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
     // pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets){
         mTweets = tweets;
+        client = TwitterApp.getRestClient(context);
+
     }
 
     // for each row, inflate the layout and cache references into ViewHolder
@@ -73,28 +78,28 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         });
 
         // set onClickListener for retweet button
-//        holder.ivRetweet.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v){
-//                Log.d("Tag", "Retweet Tapped");
-//                client = TwitterApp.getRestClient(context);
-//                client.retweet(tweet.tweetId, new JsonHttpResponseHandler(){
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                        holder.tvRetweetNum.setText(Integer.toString(Integer.parseInt(holder.tvRetweetNum.getText().toString())+1));
-//                    }
-//                    @Override
-//                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                        Log.d("TwitterClient", responseString);
-//                        throwable.printStackTrace();
-//                    }
-//                });
-//            }
-//        });
+        holder.ivRetweet.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d("Tag", "Retweet Tapped");
+                client.retweet(tweet.tweetId, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        holder.tvRetweetNum.setText(Integer.toString(Integer.parseInt(holder.tvRetweetNum.getText().toString())+1));
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Log.d("TwitterClient", responseString);
+                        throwable.printStackTrace();
+                    }
+                });
+            }
+        });
 
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
                 .placeholder(R.drawable.ic_vector_person)
-                .transform(new RoundedCornersTransformation( 15, 0))
+                .transform(new CircleCrop())
                 .into(holder.ivProfileImage);
     }
 

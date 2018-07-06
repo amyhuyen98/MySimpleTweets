@@ -49,6 +49,9 @@ public class Tweet {
         // get date and time
         tweet.date = getDate(rawJsonDate);
         tweet.time = getTime(rawJsonDate);
+
+        // get entities array
+
         return tweet;
 
     }

@@ -6,11 +6,10 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.codepath.apps.restclienttemplate.models.GlideApp;
 
 import org.parceler.Parcels;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetDetails extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class TweetDetails extends AppCompatActivity {
         GlideApp.with(this)
                 .load(tweet.user.profileImageUrl)
                 .placeholder(R.drawable.ic_vector_person)
-                .transform(new RoundedCornersTransformation( 15, 0))
+                .transform(new CircleCrop())
                 .into(ivProfileImage);
     }
 }
