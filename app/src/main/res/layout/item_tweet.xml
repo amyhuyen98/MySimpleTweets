@@ -76,13 +76,62 @@
         android:layout_height="20dp"
         android:layout_below="@id/tvBody"
         android:layout_marginStart="71dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="35dp"
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@id/ivProfileImage"
         android:adjustViewBounds="true"
         android:cropToPadding="true"
         android:tint="@color/medium_gray_50"
         app:srcCompat="@drawable/reply" />
+
+    <ImageView
+        android:id="@+id/ivRetweet"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvBody"
+        android:layout_marginStart="71dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/ivReply"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke"/>
+
+    <TextView
+        android:id="@+id/tvRetweetNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ivRetweet"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/medium_gray_50"
+        android:layout_below="@id/tvBody"
+        android:text="#" />
+
+    <TextView
+        android:id="@+id/tvFaveNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ivFavorite"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/medium_gray_50"
+        android:layout_below="@id/tvBody"
+        android:text="#" />
+
+    <ImageView
+        android:id="@+id/ivFavorite"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvBody"
+        android:layout_marginStart="71dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/tvRetweetNum"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/ic_vector_heart_stroke"/>
 
 </RelativeLayout>
