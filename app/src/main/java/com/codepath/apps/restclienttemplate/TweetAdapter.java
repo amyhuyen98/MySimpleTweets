@@ -82,6 +82,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             @Override
             public void onClick(View v){
                 Log.d("Tag", "Retweet Tapped");
+                holder.ivRetweet.setSelected(true);
                 client.retweet(tweet.tweetId, new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -90,6 +91,25 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         Log.d("TwitterClient", responseString);
+                        throwable.printStackTrace();
+                    }
+                });
+            }
+        });
+
+        // set onClickListener for favorite button
+        holder.ivFavorite.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d("Tag", "Favorite Tapped");
+                holder.ivFavorite.setSelected(true);
+                client.favorite(tweet.tweetId, new JsonHttpResponseHandler(){
+                    @Override public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                        holder.tvFaveNum.setText(Integer.toString(Integer.parseInt(holder.tvFaveNum.getText().toString())+1));
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+                        Log.d("Twitter Client", responseString);
                         throwable.printStackTrace();
                     }
                 });
