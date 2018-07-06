@@ -26,6 +26,8 @@ public class Tweet {
     public long faveNum;
     public String date;
     public String time;
+    public Boolean favorited;
+    public Boolean retweeted;
 
     public Tweet(){}
 
@@ -41,6 +43,8 @@ public class Tweet {
         tweet.tweetId = jsonObject.getString("id_str");
         tweet.retweetNum = jsonObject.getLong("retweet_count");
         tweet.faveNum = jsonObject.getLong("favorite_count");
+        tweet.favorited = jsonObject.getBoolean("favorited");
+        tweet.retweeted = jsonObject.getBoolean("retweeted");
 
         // extract rawJsonDate value from JSON and convert to relativeDate
         String rawJsonDate = jsonObject.getString("created_at");
@@ -49,8 +53,6 @@ public class Tweet {
         // get date and time
         tweet.date = getDate(rawJsonDate);
         tweet.time = getTime(rawJsonDate);
-
-        // get entities array
 
         return tweet;
 

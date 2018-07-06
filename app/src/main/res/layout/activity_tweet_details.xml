@@ -117,4 +117,58 @@
         android:textColor="@color/medium_gray_50"
         android:text="Likes"/>
 
+    <ImageView
+        android:id="@+id/ivReply"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvRetweetNum"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="100dp"
+        android:layout_alignStart="@id/tvRetweetNum"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:tint="@color/medium_gray_50"
+        app:srcCompat="@drawable/reply" />
+
+    <ImageView
+        android:id="@+id/ivRetweet"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvRetweet"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="100dp"
+        android:layout_toEndOf="@id/ivReply"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/ic_retweet"/>
+
+    <ImageView
+        android:id="@+id/ivFavorite"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tvFaveNum"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/ivRetweet"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/ic_favorite"/>
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onClose"
+        app:srcCompat="@drawable/ic_vector_close" />
+
 </RelativeLayout>

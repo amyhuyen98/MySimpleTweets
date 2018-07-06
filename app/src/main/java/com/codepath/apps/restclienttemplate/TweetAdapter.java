@@ -77,6 +77,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             }
         });
 
+        // check if tweet has already been retweeted or favorited and change colors to match
+        if (tweet.favorited){holder.ivFavorite.setSelected(true);}
+        if (tweet.retweeted){holder.ivRetweet.setSelected(true);}
+
         // set onClickListener for retweet button
         holder.ivRetweet.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -116,6 +120,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             }
         });
 
+        // load user profile images on tweets
         GlideApp.with(context)
                 .load(tweet.user.profileImageUrl)
                 .placeholder(R.drawable.ic_vector_person)

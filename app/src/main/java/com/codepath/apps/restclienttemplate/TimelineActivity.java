@@ -57,8 +57,6 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         // set the adapter
         rvTweets.setAdapter(tweetAdapter);
-//        populateTimeline(); <-- moved it to populate timeline to ensure that spinner shows up before timeline starts
-
 
         // swipe refresh - lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
@@ -72,6 +70,7 @@ public class TimelineActivity extends AppCompatActivity {
                 fetchTimelineAsync(0);
             }
         });
+
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
