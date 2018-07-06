@@ -21,6 +21,8 @@ public class TweetDetails extends AppCompatActivity {
     TextView tvTime;
     TextView tvDate;
     Tweet tweet;
+    TextView tvRetweetNum;
+    TextView tvFaveNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class TweetDetails extends AppCompatActivity {
         tvBody = findViewById(R.id.tvBody);
         tvTime = findViewById(R.id.tvTime);
         tvDate = findViewById(R.id.tvDate);
+        tvRetweetNum = findViewById(R.id.tvRetweetNum);
+        tvFaveNum= findViewById(R.id.tvFaveNum);
 
         // unwrap the tweet from the intent
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
@@ -42,6 +46,8 @@ public class TweetDetails extends AppCompatActivity {
         tvBody.setText(tweet.body);
         tvTime.setText(tweet.time);
         tvDate.setText(tweet.date);
+        tvRetweetNum.setText(Long.toString(tweet.retweetNum));
+        tvFaveNum.setText(Long.toString(tweet.faveNum));
 
         GlideApp.with(this)
                 .load(tweet.user.profileImageUrl)

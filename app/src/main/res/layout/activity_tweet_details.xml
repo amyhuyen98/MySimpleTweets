@@ -75,4 +75,46 @@
         android:layout_alignBottom="@id/tvTime"
         android:textColor="@color/medium_gray_50" />
 
+    <TextView
+        android:id="@+id/tvRetweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvRetweetNum"
+        android:layout_below="@+id/tvTime"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/medium_gray_50"
+        android:text="Retweets" />
+
+    <TextView
+        android:id="@+id/tvRetweetNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/tvTime"
+        android:layout_below="@+id/tvTime"
+        android:textStyle="bold"
+        android:layout_marginRight="3dp"
+        android:textColor="@color/gray"
+        android:text="#" />
+
+    <TextView
+        android:id="@+id/tvFaveNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tvRetweet"
+        android:layout_below="@+id/tvTime"
+        android:textStyle="bold"
+        android:layout_marginRight="3dp"
+        android:textColor="@color/gray"
+        android:text="#" />
+
+    <TextView
+        android:id="@+id/tvFave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTime"
+        android:layout_toEndOf="@id/tvFaveNum"
+        android:layout_alignBottom="@id/tvRetweet"
+        android:textColor="@color/medium_gray_50"
+        android:text="Likes"/>
+
 </RelativeLayout>

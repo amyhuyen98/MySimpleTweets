@@ -82,7 +82,7 @@ public class Tweet {
         return date;
     }
 
-    // method that changes the rawJsondate from Twitter API into time
+    // method that changes the rawJsondate from Twitter API into time (+17 to correct for time zone differences)
     public static String getTime (String rawJsonDate){
         String time="";
         String[] array = rawJsonDate.split(" ");
