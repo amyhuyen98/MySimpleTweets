@@ -148,9 +148,9 @@ public class TimelineActivity extends AppCompatActivity {
                     // add that Tweet model to our data source
                     // notify the adapter that we've added an item
                     try {
-                    Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
-                    tweets.add(tweet);
-                    tweetAdapter.notifyItemInserted(tweets.size() - 1);
+                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        tweets.add(tweet);
+                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
                     } catch (JSONException e){
                         e.printStackTrace();
                     }
