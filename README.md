@@ -46,8 +46,9 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] List anything else that you can get done to improve the app functionality!
   * [x] Implemented circle crop transformation on images loaded using Glide
+  * [x] UI reflects Twitter's night mode color scheme
 
 ## Video Walkthrough
 
