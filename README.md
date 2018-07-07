@@ -24,8 +24,8 @@ The following **optional** features are implemented:
 * [x] User can **pull down to refresh tweets timeline**
 * [x] User is using **"Twitter branded" colors and styles**
 * [x] User sees an **indeterminate progress indicator** when any background or network task is happening
-* [x] User can **select "reply" from detail view to respond to a tweet**
-  * [x] User that wrote the original tweet is **automatically "@" replied in compose**
+* [ ] User can **select "reply" from detail view to respond to a tweet**
+  * [ ] User that wrote the original tweet is **automatically "@" replied in compose**
 * [x] User can tap a tweet to **open a detailed tweet view**
   * [x] User can **take favorite (and unfavorite) or reweet** actions on a tweet
 * [x] User can **see embedded image media within a tweet** on list or detail view.
@@ -49,6 +49,8 @@ The following **additional** features are implemented:
 * [x] List anything else that you can get done to improve the app functionality!
   * [x] Implemented circle crop transformation on images loaded using Glide
   * [x] UI reflects Twitter's night mode color scheme
+  * [x] User can **select "reply" from timeline view (not detail) to respond to a tweet**
+       * [x] User that wrote the original tweet is **automatically "@" replied in compose**
 
 ## Video Walkthrough
 
