@@ -15,43 +15,38 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TweetDetails extends AppCompatActivity {
 
-    ImageView ivProfileImage;
-    TextView tvUserName;
-    TextView tvHandle;
-    TextView tvBody;
-    TextView tvTime;
-    TextView tvDate;
-    Tweet tweet;
-    TextView tvRetweetNum;
-    TextView tvFaveNum;
-    ImageView ivReply;
-    ImageView ivRetweet;
-    ImageView ivFavorite;
+    // the view objects
+    @BindView (R.id.ivProfileImage) ImageView ivProfileImage;
+    @BindView (R.id.tvUserName) TextView tvUserName;
+    @BindView (R.id.tvHandle) TextView tvHandle;
+    @BindView (R.id.tvBody) TextView tvBody;
+    @BindView (R.id.tvTime) TextView tvTime;
+    @BindView (R.id.tvDate) TextView tvDate;
+    @BindView (R.id.tvRetweetNum) TextView tvRetweetNum;
+    @BindView (R.id.tvFaveNum) TextView tvFaveNum;
+    @BindView (R.id.ivReply) ImageView ivReply;
+    @BindView (R.id.ivRetweet) ImageView ivRetweet;
+    @BindView (R.id.ivFavorite) ImageView ivFavorite;
+    @BindView (R.id.ivMedia) ImageView ivMedia;
+
     TwitterClient client;
-    ImageView ivMedia;
+    Tweet tweet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_details);
 
-        ivProfileImage = findViewById(R.id.ivProfileImage);
-        tvUserName = findViewById(R.id.tvUserName);
-        tvHandle = findViewById(R.id.tvHandle);
-        tvBody = findViewById(R.id.tvBody);
-        tvTime = findViewById(R.id.tvTime);
-        tvDate = findViewById(R.id.tvDate);
-        tvRetweetNum = findViewById(R.id.tvRetweetNum);
-        tvFaveNum= findViewById(R.id.tvFaveNum);
-        ivReply = findViewById(R.id.ivReply);
-        ivRetweet = findViewById(R.id.ivRetweet);
-        ivFavorite = findViewById(R.id.ivFavorite);
-        ivMedia = findViewById(R.id.ivMedia);
+        // resolve the view objects
+        ButterKnife.bind(this);
 
         // unwrap the tweet from the intent
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));

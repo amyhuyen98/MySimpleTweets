@@ -106,7 +106,8 @@ public class Tweet {
         String[] array = rawJsonDate.split(" ");
         String temp = array[3];
         String[] timeArray = temp.split(":");
-        time += Integer.toString((Integer.parseInt(timeArray[0])+17)%12) + ":";
+        if (((Integer.parseInt(timeArray[0])+17)%12)==0){time += timeArray[1];}
+        else{time += Integer.toString((Integer.parseInt(timeArray[0])+17)%12) + ":";}
         time += timeArray[1];
         if ((Integer.parseInt(timeArray[0])+17)>= 12){time += " PM";}
         else {time += " AM";}
