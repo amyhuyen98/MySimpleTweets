@@ -53,13 +53,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-
-All Features (except swipe down to load)
 <img src='https://github.com/amyhuyen98/MySimpleTweets/blob/master/walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-
-
-Swipe Down to Load Feature
 <img src='https://github.com/amyhuyen98/MySimpleTweets/blob/master/walkthrough-loading.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
