@@ -119,19 +119,40 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         // set onClickListener for favorite button
         holder.ivFavorite.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
-                Log.d("Tag", "Favorite Tapped");
-                client.favorite(tweet.tweetId, new JsonHttpResponseHandler(){
-                    @Override public void onSuccess(int statusCode, Header[] headers, JSONObject response){
-                        holder.ivFavorite.setSelected(true);
-                        holder.tvFaveNum.setText(Integer.toString(Integer.parseInt(holder.tvFaveNum.getText().toString())+1));
-                    }
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
-                        Log.d("Twitter Client", responseString);
-                        throwable.printStackTrace();
-                    }
-                });
+            public void onClick(View v) {
+                if (holder.ivFavorite.isSelected() == false) {
+                    Log.d("Tag", "Favorite Tapped");
+                    client.favorite(tweet.tweetId, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            holder.ivFavorite.setSelected(true);
+                            holder.tvFaveNum.setText(Integer.toString(Integer.parseInt(holder.tvFaveNum.getText().toString()) + 1));
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            Log.d("Twitter Client", responseString);
+                            throwable.printStackTrace();
+                        }
+                    });
+                }
+                else{
+                    Log.d("Tag", "Favorite Untapped");
+                    client.unfavorite(tweet.tweetId, new JsonHttpResponseHandler(){
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                            holder.ivFavorite.setSelected(false);
+                            holder.tvFaveNum.setText(Integer.toString(Integer.parseInt(holder.tvFaveNum.getText().toString()) -1));
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            Log.d("Twitter Client", responseString);
+                            throwable.printStackTrace();
+                        }
+                    });
+
+                }
             }
         });
 

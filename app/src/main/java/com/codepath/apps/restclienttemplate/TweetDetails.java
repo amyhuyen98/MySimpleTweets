@@ -71,18 +71,37 @@ public class TweetDetails extends AppCompatActivity {
         ivFavorite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d("Tag", "Favorite Tapped");
-                client.favorite(tweet.tweetId, new JsonHttpResponseHandler(){
-                    @Override public void onSuccess(int statusCode, Header[] headers, JSONObject response){
-                        ivFavorite.setSelected(true);
-                        tvFaveNum.setText(Integer.toString(Integer.parseInt(tvFaveNum.getText().toString())+1));
-                    }
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
-                        Log.d("Twitter Client", responseString);
-                        throwable.printStackTrace();
-                    }
-                });
+                if (ivFavorite.isSelected() == false){
+                    Log.d("Tag", "Favorite Tapped");
+                    client.favorite(tweet.tweetId, new JsonHttpResponseHandler(){
+                        @Override public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                            ivFavorite.setSelected(true);
+                            tvFaveNum.setText(Integer.toString(Integer.parseInt(tvFaveNum.getText().toString())+1));
+                        }
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+                            Log.d("Twitter Client", responseString);
+                            throwable.printStackTrace();
+                        }
+                    });
+                }
+                else{
+                    Log.d("Tag", "Favorite Untapped");
+                    client.unfavorite(tweet.tweetId, new JsonHttpResponseHandler(){
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response){
+                            ivFavorite.setSelected(false);
+                            tvFaveNum.setText(Integer.toString(Integer.parseInt(tvFaveNum.getText().toString()) -1));
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            Log.d("Twitter Client", responseString);
+                            throwable.printStackTrace();
+                        }
+                    });
+
+                }
             }
         });
 
