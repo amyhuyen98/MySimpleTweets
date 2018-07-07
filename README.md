@@ -50,7 +50,7 @@ The following **additional** features are implemented:
   * [x] Implemented circle crop transformation on images loaded using Glide
   * [x] UI reflects Twitter's night mode color scheme
   * [x] User can **select "reply" from timeline view (not detail) to respond to a tweet**
-   * [x] User that wrote the original tweet is **automatically "@" replied in compose**
+        * [x] User that wrote the original tweet is **automatically "@" replied in compose**
 
 ## Video Walkthrough
 
